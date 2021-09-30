@@ -22,7 +22,7 @@ function operate(operator, a, b) {
   } else if (operator === '*') {
     return multiply(a, b);
   } else if (operator === '/') {
-    return divede(a, b);
+    return divide(a, b);
   } else {
     return 'Invalid operator!';
   }
