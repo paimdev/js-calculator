@@ -43,3 +43,29 @@ table {
 }
 
 /* End of reset */
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+  padding: 50px;
+  width: 350px;
+}
+
+#display {
+  padding: 20px;
+  height: 50px;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+button {
+  height: 50px;
+}
