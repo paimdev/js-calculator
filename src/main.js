@@ -15,31 +15,39 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-  if (operator === "+") {
+  if (operator === '+') {
     return add(a, b);
-  } else if (operator === "-") {
+  } else if (operator === '-') {
     return subtract(a, b);
-  } else if (operator === "*") {
+  } else if (operator === '*') {
     return multiply(a, b);
-  } else if (operator === "/") {
+  } else if (operator === '/') {
     return divide(a, b);
   } else {
-    return "Invalid operator!";
+    return 'Invalid operator!';
   }
 }
 
-const numberButtons = document.querySelectorAll(".number");
+const numberButtons = document.querySelectorAll('.number');
 const display = document.querySelector('#display');
 const operatorButtons = document.querySelectorAll('.math-operator');
-const equalsButton = document.querySelector('.operate')
+const equalsButton = document.querySelector('.operate');
+const clearButton = document.querySelector('.clear-operator');
 
-let firstNumber, secondNumber, operator;
+let firstNumber, operator;
 
+let currentNumbers = [];
 let displayNumbers = [];
+let result = [];
+
+clearButton.addEventListener('click', () => {
+  clearEverything();
+});
 
 equalsButton.addEventListener('click', () => {
-  secondNumber = 1;
-  operate(operator, firstNumber, secondNumber);
+  secondNumber = parseInt(currentNumbers.join(''));
+  result.push(operate(operator, firstNumber, secondNumber));
+  updateDisplay(result);
 });
 
 for (const item of operatorButtons) {
@@ -54,15 +62,26 @@ for (const item of operatorButtons) {
 for (const button of numberButtons) {
   button.addEventListener('click', () => {
     displayNumbers.push(button.textContent);
+    currentNumbers.push(button.textContent);
     updateDisplay(displayNumbers);
   });
 }
 
-function updateDisplay(displayNumbers, operator) {
-  let stringNumbers = displayNumbers.join('');
+function updateDisplay(toDisplay) {
+  let stringNumbers = toDisplay.join('');
   display.textContent = stringNumbers;
 };
 
 function operatorPress(){
   firstNumber = parseInt(display.textContent);
+  currentNumbers = [];
 };
+
+function clearEverything() {
+  firstNumber = 0;
+  operator = '';
+  currentNumbers = [];
+  displayNumbers = [];
+  result = [];
+  updateDisplay(displayNumbers);
+}
