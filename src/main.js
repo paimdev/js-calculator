@@ -11,6 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+  if (a === 0 || b === 0) {
+    return "Mhmm, can't really do that!";
+  }
   return a / b;
 }
 
@@ -24,6 +27,7 @@ function operate(operator, a, b) {
   } else if (operator === '/') {
     return divide(a, b);
   } else {
+    clearEverything();
     return 'Invalid operator!';
   }
 }
@@ -35,6 +39,7 @@ const equalsButton = document.querySelector('.operate');
 const clearButton = document.querySelector('.clear-operator');
 
 let firstNumber, operator;
+let operatorCounter = 0;
 
 let currentNumbers = [];
 let displayNumbers = [];
@@ -45,9 +50,8 @@ clearButton.addEventListener('click', () => {
 });
 
 equalsButton.addEventListener('click', () => {
-  secondNumber = parseInt(currentNumbers.join(''));
-  result.push(operate(operator, firstNumber, secondNumber));
-  updateDisplay(result);
+  equalsOperation();
+  operatorCounter = 0;
 });
 
 for (const item of operatorButtons) {
@@ -73,13 +77,29 @@ function updateDisplay(toDisplay) {
 };
 
 function operatorPress(){
-  firstNumber = parseInt(display.textContent);
-  currentNumbers = [];
+  if (operatorCounter === 0) {
+    firstNumber = parseInt(display.textContent);
+    currentNumbers = [];
+    operatorCounter++;
+  } else {
+    equalsOperation();
+  }
 };
+
+function equalsOperation() {
+  secondNumber = parseInt(currentNumbers.join(''));
+  result.push(operate(operator, parseInt(firstNumber), secondNumber));
+  firstNumber = result.join('');
+  updateDisplay(result);
+  displayNumbers = [result];
+  currentNumbers = [];
+  result = [];
+}
 
 function clearEverything() {
   firstNumber = 0;
   operator = '';
+  operatorCounter = 0;
   currentNumbers = [];
   displayNumbers = [];
   result = [];
