@@ -67,5 +67,17 @@ body {
 }
 
 button {
-  height: 50px;
+	height: 50px;
+	background-color: #fdf7fa;
+	border-color: #fdf7fa;
+}
+
+.special-button {
+	background-color: #a8dcd9;
+	border-color: #a8dcd9;
+}
+
+.clear-operator {
+	background-color: #e2a3c7;
+	border-color: #e2a3c7;
 }
