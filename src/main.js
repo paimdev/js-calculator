@@ -30,12 +30,21 @@ function operate(operator, a, b) {
 
 const numberButtons = document.querySelectorAll(".number");
 const display = document.querySelector('#display');
+const operators = document.querySelectorAll('.math-operator');
 
-console.log(numberButtons);
+let firstNumber, secondNumber, operator;
 
 let displayNumbers = [];
+
+for (const item of operators) {
+  item.addEventListener('click', () => {
+    operatorPress();
+    operator = item.textContent;
+  });
+}
+
 for (const button of numberButtons) {
-  button.addEventListener('click', function() {
+  button.addEventListener('click', () => {
     displayNumbers.push(button.textContent);
     updateDisplay(displayNumbers);
   });
@@ -44,4 +53,9 @@ for (const button of numberButtons) {
 function updateDisplay(displayNumbers) {
   let stringNumbers = displayNumbers.join('');
   display.textContent = stringNumbers;
+};
+
+
+function operatorPress(){
+  firstNumber = parseInt(display.textContent);
 };
